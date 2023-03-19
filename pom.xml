@@ -43,7 +43,7 @@
             </dependency>
             <dependency>
                 <groupId>com.food.ordering.system</groupId>
-                <artifactId>order-dataaccess</artifactId>
+                <artifactId>order-data-access</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
