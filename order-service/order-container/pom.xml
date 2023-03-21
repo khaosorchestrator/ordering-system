@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.food.ordering.system</groupId>
-            <artifactId>order-dataaccess</artifactId>
+            <artifactId>order-data-access</artifactId>
         </dependency>
         <dependency>
             <groupId>com.food.ordering.system</groupId>
