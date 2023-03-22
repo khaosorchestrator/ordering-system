@@ -2,7 +2,7 @@ package com.food.ordering.system.domain.valueobject;
 
 import java.util.Objects;
 
-public abstract class BaseId<T>{
+public abstract class BaseId<T> {
 
     private final T value;
 

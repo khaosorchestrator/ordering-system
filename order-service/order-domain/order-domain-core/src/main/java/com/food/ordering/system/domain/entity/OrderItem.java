@@ -6,11 +6,11 @@ import com.food.ordering.system.domain.valueobject.OrderItemId;
 
 public class OrderItem extends BaseEntity<OrderItemId> {
 
-    private OrderId orderId;
     private final Product product;
     private final int quantity;
     private final Money price;
     private final Money subtotal;
+    private OrderId orderId;
 
     private OrderItem(Builder builder) {
         super.setId(builder.orderItemId);
@@ -39,6 +39,11 @@ public class OrderItem extends BaseEntity<OrderItemId> {
 
     public Money getSubtotal() {
         return subtotal;
+    }
+
+    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
+        this.orderId = orderId;
+        super.setId(orderItemId);
     }
 
     public static final class Builder {

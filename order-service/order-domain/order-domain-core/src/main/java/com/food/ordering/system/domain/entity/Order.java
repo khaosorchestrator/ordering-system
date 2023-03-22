@@ -3,8 +3,9 @@ package com.food.ordering.system.domain.entity;
 import com.food.ordering.system.domain.valueobject.*;
 
 import java.util.List;
+import java.util.UUID;
 
-public class Order extends AggregateRoot<OrderId>{
+public class Order extends AggregateRoot<OrderId> {
 
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
@@ -15,6 +16,21 @@ public class Order extends AggregateRoot<OrderId>{
     private TrackingId trackingId;
     private OrderStatus orderStatus;
     private List<String> failureMessages;
+
+    public void initializeOrder() {
+        setId(new OrderId(UUID.randomUUID()));
+        trackingId = new TrackingId(UUID.randomUUID());
+        orderStatus = OrderStatus.PENDING;
+        initializeOrderItems();
+    }
+
+    private void initializeOrderItems() {
+        long itemId = 1;
+
+        for (OrderItem orderItem : items) {
+            orderItem.initializeOrderItem(super.getId(), new OrderItemId(itemId++));
+        }
+    }
 
     private Order(Builder builder) {
         super.setId(builder.orderId);
@@ -27,7 +43,6 @@ public class Order extends AggregateRoot<OrderId>{
         orderStatus = builder.orderStatus;
         failureMessages = builder.failureMessages;
     }
-
 
     public CustomerId getCustomerId() {
         return customerId;
