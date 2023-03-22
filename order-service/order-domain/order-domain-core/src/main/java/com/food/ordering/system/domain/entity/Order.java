@@ -1,5 +1,6 @@
 package com.food.ordering.system.domain.entity;
 
+import com.food.ordering.system.domain.exception.OrderDomainException;
 import com.food.ordering.system.domain.valueobject.*;
 
 import java.util.List;
@@ -29,6 +30,41 @@ public class Order extends AggregateRoot<OrderId> {
 
         for (OrderItem orderItem : items) {
             orderItem.initializeOrderItem(super.getId(), new OrderItemId(itemId++));
+        }
+    }
+
+    public void validateOrder() {
+        validateInitialOrder();
+        validateTotalPrice();
+        validateItemsPrice();
+    }
+
+    private void validateInitialOrder() {
+        if (orderStatus != null || getId() != null) {
+            throw new OrderDomainException("Order is not in correct state for initialization!");
+        }
+    }
+
+    private void validateTotalPrice() {
+        if (price == null || !price.isGreaterThanZero()) {
+            throw new OrderDomainException("Total price must be greater than zero!");
+        }
+    }
+
+    private void validateItemsPrice() {
+        Money orderItemsTotal = items.stream().map(orderItem -> {
+            validateItemPrice(orderItem);
+            return orderItem.getSubtotal();
+        }).reduce(Money.ZERO, Money::add);
+
+        if (price.equals(orderItemsTotal)) {
+            throw new OrderDomainException(String.format("Total price: %f is not equal to Order items total: %f", price.getAmount(), orderItemsTotal.getAmount()));
+        }
+    }
+
+    private void validateItemPrice(OrderItem orderItem) {
+        if (!orderItem.isPriceValid()) {
+            throw new OrderDomainException(String.format("Order item price: %f is not valid for product: %s", orderItem.getPrice().getAmount(), orderItem.getProduct().getId().getValue()));
         }
     }
 
