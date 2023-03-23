@@ -5,7 +5,6 @@ import com.food.ordering.system.domain.valueobject.*;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class Order extends AggregateRoot<OrderId> {
 
@@ -18,6 +17,18 @@ public class Order extends AggregateRoot<OrderId> {
     private TrackingId trackingId;
     private OrderStatus orderStatus;
     private List<String> failureMessages;
+
+    private Order(Builder builder) {
+        super.setId(builder.orderId);
+        customerId = builder.customerId;
+        restaurantId = builder.restaurantId;
+        deliveryAddress = builder.deliveryAddress;
+        price = builder.price;
+        items = builder.items;
+        trackingId = builder.trackingId;
+        orderStatus = builder.orderStatus;
+        failureMessages = builder.failureMessages;
+    }
 
     public void initializeOrder() {
         setId(new OrderId(UUID.randomUUID()));
@@ -65,7 +76,7 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     private void updateFailureMessages(List<String> failureMessages) {
-        if(this.failureMessages != null && failureMessages != null) {
+        if (this.failureMessages != null && failureMessages != null) {
             this.failureMessages.addAll(failureMessages.stream().filter(message -> !message.isEmpty()).toList());
         }
         if (this.failureMessages == null) {
@@ -106,18 +117,6 @@ public class Order extends AggregateRoot<OrderId> {
         if (!orderItem.isPriceValid()) {
             throw new OrderDomainException(String.format("Order item price: %f is not valid for product: %s", orderItem.getPrice().getAmount(), orderItem.getProduct().getId().getValue()));
         }
-    }
-
-    private Order(Builder builder) {
-        super.setId(builder.orderId);
-        customerId = builder.customerId;
-        restaurantId = builder.restaurantId;
-        deliveryAddress = builder.deliveryAddress;
-        price = builder.price;
-        items = builder.items;
-        trackingId = builder.trackingId;
-        orderStatus = builder.orderStatus;
-        failureMessages = builder.failureMessages;
     }
 
     public CustomerId getCustomerId() {
