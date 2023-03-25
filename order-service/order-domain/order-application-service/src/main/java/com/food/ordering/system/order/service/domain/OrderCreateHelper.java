@@ -27,13 +27,21 @@ public class OrderCreateHelper {
     private final CustomerRepository customerRepository;
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
+    private final ApplicationDomainEventPublisher applicationDomainEventPublisher;
 
-    public OrderCreateHelper(OrderDomainService orderDomainService, OrderRepository orderRepository, CustomerRepository customerRepository, RestaurantRepository restaurantRepository, OrderDataMapper orderDataMapper) {
+    public OrderCreateHelper(OrderDomainService orderDomainService,
+                             OrderRepository orderRepository,
+                             CustomerRepository customerRepository,
+                             RestaurantRepository restaurantRepository,
+                             OrderDataMapper orderDataMapper,
+                             ApplicationDomainEventPublisher applicationDomainEventPublisher
+    ) {
         this.orderDomainService = orderDomainService;
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
         this.restaurantRepository = restaurantRepository;
         this.orderDataMapper = orderDataMapper;
+        this.applicationDomainEventPublisher = applicationDomainEventPublisher;
     }
 
     @Transactional
@@ -43,7 +51,8 @@ public class OrderCreateHelper {
         Order order = orderDataMapper.CreateOrderCommandToOrder(createOrderCommand);
         OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
         saveOrder(order);
-        log.info("Order was created with id: {}", orderCreatedEvent.getOrder().getId().getValue());
+        log.info("Order is created with id: {}", orderCreatedEvent.getOrder().getId().getValue());
+        applicationDomainEventPublisher.publish(orderCreatedEvent);
         return orderCreatedEvent;
     }
 
@@ -71,7 +80,7 @@ public class OrderCreateHelper {
             log.error("Could not save order!");
             throw new OrderDomainException("Could not save order!");
         }
-        log.info("Order was saved with id: {}", result.getId().getValue());
+        log.info("Order is saved with id: {}", result.getId().getValue());
         return result;
     }
 }

@@ -24,21 +24,21 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         setOrderProductInformation(order, restaurant);
         order.validateOrder();
         order.initializeOrder();
-        log.info("Order with id: {} was initialized", order.getId().getValue());
+        log.info("Order with id: {} is initialized", order.getId().getValue());
         return new OrderCreatedEvent(order, ZonedDateTime.now(ZoneId.of(ZONE_ID)));
     }
 
     @Override
     public OrderPaidEvent payOrder(Order order) {
         order.pay();
-        log.info("Order with id: {} was paid", order.getId().getValue());
+        log.info("Order with id: {} is paid", order.getId().getValue());
         return new OrderPaidEvent(order, ZonedDateTime.now(ZoneId.of(ZONE_ID)));
     }
 
     @Override
     public void approveOrder(Order order) {
         order.approve();
-        log.info("Order with id: {} was approved", order.getId().getValue());
+        log.info("Order with id: {} is approved", order.getId().getValue());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class OrderDomainServiceImpl implements OrderDomainService {
     @Override
     public void cancelOrder(Order order, List<String> failureMessages) {
         order.cancel(failureMessages);
-        log.info("Order with id: {} was cancelled", order.getId().getValue());
+        log.info("Order with id: {} is cancelled", order.getId().getValue());
     }
 
     private void validateRestaurant(Restaurant restaurant) {
