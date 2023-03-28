@@ -4,6 +4,7 @@ import com.food.ordering.system.domain.entity.Customer;
 import com.food.ordering.system.domain.entity.Order;
 import com.food.ordering.system.domain.entity.Product;
 import com.food.ordering.system.domain.entity.Restaurant;
+import com.food.ordering.system.domain.exception.OrderDomainException;
 import com.food.ordering.system.domain.valueobject.*;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
@@ -25,8 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -147,11 +147,18 @@ public class OrderApplicationServiceTest {
     }
 
     @Test
-    public void testCreateOrder() {
+    public void testCreateOrderWithSuccessfully() {
         CreateOrderResponse createOrderResponse = orderApplicationService.createOrder(createOrderCommand);
         assertEquals(createOrderResponse.getOrderStatus(), OrderStatus.PENDING);
         assertEquals(createOrderResponse.getMessage(), "Order Created Successfully");
         assertNotNull(createOrderResponse.getOrderTrackingId());
     }
 
+    @Test
+    public void testCreateOrderWithWrongTotalPrice() {
+        OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
+                () -> orderApplicationService.createOrder(createOrderCommandWrongPrice));
+        assertEquals(orderDomainException.getMessage(),
+                "Total price: 250.00 is not equal to Order items total: 200.00!");
+    }
 }
