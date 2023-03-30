@@ -149,8 +149,8 @@ public class OrderApplicationServiceTest {
     @Test
     public void testCreateOrderWithSuccessfully() {
         CreateOrderResponse createOrderResponse = orderApplicationService.createOrder(createOrderCommand);
-        assertEquals(createOrderResponse.getOrderStatus(), OrderStatus.PENDING);
-        assertEquals(createOrderResponse.getMessage(), "Order Created Successfully");
+        assertEquals(OrderStatus.PENDING, createOrderResponse.getOrderStatus());
+        assertEquals("Order Created Successfully", createOrderResponse.getMessage());
         assertNotNull(createOrderResponse.getOrderTrackingId());
     }
 
@@ -158,16 +158,16 @@ public class OrderApplicationServiceTest {
     public void testCreateOrderWithWrongTotalPrice() {
         OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommandWrongPrice));
-        assertEquals(orderDomainException.getMessage(),
-                "Total price: 250.00 is not equal to Order items total: 200.00!");
+        assertEquals("Total price: 250.00 is not equal to Order items total: 200.00!",
+                orderDomainException.getMessage());
     }
 
     @Test
     public void testCreateOrderWithWrongProductPrice() {
         OrderDomainException orderDomainException = assertThrows(OrderDomainException.class,
                 () -> orderApplicationService.createOrder(createOrderCommandWrongProductPrice));
-        assertEquals(orderDomainException.getMessage(),
-                "Order item price: 60.00 is not valid for product: " + PRODUCT_ID);
+        assertEquals("Order item price: 60.00 is not valid for product: " + PRODUCT_ID,
+                orderDomainException.getMessage());
     }
 
     @Test
