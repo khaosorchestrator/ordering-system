@@ -17,6 +17,7 @@ public class Order extends AggregateRoot<OrderId> {
     private TrackingId trackingId;
     private OrderStatus orderStatus;
     private List<String> failureMessages;
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     private Order(Builder builder) {
         super.setId(builder.orderId);
