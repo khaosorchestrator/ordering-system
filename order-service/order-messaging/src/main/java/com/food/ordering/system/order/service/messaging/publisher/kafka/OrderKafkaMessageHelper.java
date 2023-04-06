@@ -1,6 +1,5 @@
 package com.food.ordering.system.order.service.messaging.publisher.kafka;
 
-import com.food.ordering.system.kafka.order.avro.model.PaymentRequestAvroModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.support.SendResult;
@@ -11,17 +10,23 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Component
 public class OrderKafkaMessageHelper {
 
-    public ListenableFutureCallback<SendResult<String, PaymentRequestAvroModel>> getKafkaCallback(String paymentResponseTopicName, PaymentRequestAvroModel paymentRequestAvroModel) {
-        return new ListenableFutureCallback<SendResult<String, PaymentRequestAvroModel>>() {
+    public <T> ListenableFutureCallback<SendResult<String, T>> getKafkaCallback(String responseTopicName, T requestAvroModel, String orderId, String requestAvroModelName) {
+        return new ListenableFutureCallback<SendResult<String, T>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("Error while sending PaymentRequestAvroModel message {} to topic {}", paymentRequestAvroModel.toString(), paymentResponseTopicName, ex);
+                log.error("Error while sending PaymentRequestAvroModel message {} to topic {}", requestAvroModel.toString(), responseTopicName, ex);
             }
 
             @Override
-            public void onSuccess(SendResult<String, PaymentRequestAvroModel> result) {
+            public void onSuccess(SendResult<String, T> result) {
                 RecordMetadata metadata = result.getRecordMetadata();
-                log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}", paymentRequestAvroModel.getOrderId(), metadata.topic(), metadata.partition(), metadata.offset(), metadata.timestamp());
+                log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}",
+                        orderId,
+                        metadata.topic(),
+                        metadata.partition(),
+                        metadata.offset(),
+                        metadata.timestamp()
+                );
             }
         };
     }
