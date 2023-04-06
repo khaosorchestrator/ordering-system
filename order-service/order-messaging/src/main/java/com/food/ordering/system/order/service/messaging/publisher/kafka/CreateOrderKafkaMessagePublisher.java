@@ -21,6 +21,7 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
     private final OrderMessagingDataMapper orderMessagingDataMapper;
     private final OrderServiceConfigData orderServiceConfigData;
     private final KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer;
+    private final OrderKafkaMessageHelper orderKafkaMessageHelper;
 
     @Override
     public void publish(OrderCreatedEvent domainEvent) {
@@ -29,27 +30,10 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
 
         try {
             PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderCreatedEventToPaymentRequestAvroModel(domainEvent);
-
-            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel, getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(), paymentRequestAvroModel));
-
+            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel, orderKafkaMessageHelper.getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(), paymentRequestAvroModel));
             log.info("PaymentRequestAvroModel sent to Kafka for order id: {}", paymentRequestAvroModel.getOrderId());
         } catch (Exception e) {
             log.error("Error while sending PaymentRequestAvroModel message" + " to Kafka with order id: {}, error: {}", orderId, e.getMessage());
         }
-    }
-
-    private ListenableFutureCallback<SendResult<String, PaymentRequestAvroModel>> getKafkaCallback(String paymentResponseTopicName, PaymentRequestAvroModel paymentRequestAvroModel) {
-        return new ListenableFutureCallback<SendResult<String, PaymentRequestAvroModel>>() {
-            @Override
-            public void onFailure(Throwable ex) {
-                log.error("Error while sending PaymentRequestAvroModel message {} to topic {}", paymentRequestAvroModel.toString(), paymentResponseTopicName, ex);
-            }
-
-            @Override
-            public void onSuccess(SendResult<String, PaymentRequestAvroModel> result) {
-                RecordMetadata metadata = result.getRecordMetadata();
-                log.info("Received successful response from Kafka for order id: {}" + " Topic: {} Partition: {} Offset: {} Timestamp: {}", paymentRequestAvroModel.getOrderId(), metadata.topic(), metadata.partition(), metadata.offset(), metadata.timestamp());
-            }
-        };
     }
 }
