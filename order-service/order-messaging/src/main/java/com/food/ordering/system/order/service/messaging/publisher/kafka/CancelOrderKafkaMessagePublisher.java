@@ -27,7 +27,8 @@ public class CancelOrderKafkaMessagePublisher implements OrderCancelledPaymentRe
 
         try {
             PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderCancelledEventToPaymentRequestAvroModel(domainEvent);
-            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel, orderKafkaMessageHelper.getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(), paymentRequestAvroModel));
+            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel, orderKafkaMessageHelper.getKafkaCallback(
+                    orderServiceConfigData.getPaymentResponseTopicName(), paymentRequestAvroModel, orderId, "PaymentRequestAvroModel"));
             log.info("PaymentRequestAvroModel sent to Kafka for order id: {}", paymentRequestAvroModel.getOrderId());
         } catch (Exception e) {
             log.error("Error while sending PaymentRequestAvroModel message" + " to Kafka with order id: {}, error: {}", orderId, e.getMessage());

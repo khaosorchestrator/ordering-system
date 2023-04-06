@@ -8,10 +8,7 @@ import com.food.ordering.system.order.service.domain.ports.output.message.publis
 import com.food.ordering.system.order.service.messaging.mapper.OrderMessagingDataMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Slf4j
 @Component
@@ -30,7 +27,15 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
 
         try {
             PaymentRequestAvroModel paymentRequestAvroModel = orderMessagingDataMapper.orderCreatedEventToPaymentRequestAvroModel(domainEvent);
-            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel, orderKafkaMessageHelper.getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(), paymentRequestAvroModel));
+            kafkaProducer.send(orderServiceConfigData.getPaymentRequestTopicName(), orderId, paymentRequestAvroModel,
+                    orderKafkaMessageHelper
+                            .getKafkaCallback(
+                                    orderServiceConfigData.getPaymentResponseTopicName(),
+                                    paymentRequestAvroModel,
+                                    orderId,
+                                    "PaymentRequestAvroModel"
+                            )
+            );
             log.info("PaymentRequestAvroModel sent to Kafka for order id: {}", paymentRequestAvroModel.getOrderId());
         } catch (Exception e) {
             log.error("Error while sending PaymentRequestAvroModel message" + " to Kafka with order id: {}, error: {}", orderId, e.getMessage());
