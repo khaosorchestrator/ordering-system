@@ -28,7 +28,7 @@ public class PaymentResponseKafkaListener implements KafkaConsumer<PaymentRespon
     public void receive(@Payload List<PaymentResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
-                        @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
+                        @Header(KafkaHeaders.OFFSET) List<String> offsets) {
         log.info("{} number of payment responses received with keys: {}, partitions: {} and offsets: {}",
                 messages.size(),
                 keys.toString(),
