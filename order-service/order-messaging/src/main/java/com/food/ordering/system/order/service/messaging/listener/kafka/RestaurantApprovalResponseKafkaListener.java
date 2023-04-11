@@ -25,7 +25,7 @@ public class RestaurantApprovalResponseKafkaListener implements KafkaConsumer<Re
     private final OrderMessagingDataMapper orderMessagingDataMapper;
 
     @Override
-    @KafkaListener(id = "${kafka-consumer-config.restaurant-consumer-group-id}", topics = "${order-service.restaurant-response-topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.restaurant-approval-consumer-group-id}", topics = "${order-service.restaurant-approval-response-topic-name}")
     public void receive(@Payload List<RestaurantApprovalResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
