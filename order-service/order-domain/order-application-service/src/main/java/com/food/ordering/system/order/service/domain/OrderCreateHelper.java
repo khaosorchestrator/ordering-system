@@ -8,9 +8,11 @@ import com.food.ordering.system.domain.event.OrderCreatedEvent;
 import com.food.ordering.system.domain.exception.OrderDomainException;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
 import com.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
+import com.food.ordering.system.order.service.domain.ports.output.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
 import com.food.ordering.system.order.service.domain.ports.output.repository.CustomerRepository;
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.food.ordering.system.order.service.domain.ports.output.repository.RestaurantRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class OrderCreateHelper {
 
     private final OrderDomainService orderDomainService;
@@ -27,32 +30,16 @@ public class OrderCreateHelper {
     private final CustomerRepository customerRepository;
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
-    private final ApplicationDomainEventPublisher applicationDomainEventPublisher;
-
-    public OrderCreateHelper(OrderDomainService orderDomainService,
-                             OrderRepository orderRepository,
-                             CustomerRepository customerRepository,
-                             RestaurantRepository restaurantRepository,
-                             OrderDataMapper orderDataMapper,
-                             ApplicationDomainEventPublisher applicationDomainEventPublisher
-    ) {
-        this.orderDomainService = orderDomainService;
-        this.orderRepository = orderRepository;
-        this.customerRepository = customerRepository;
-        this.restaurantRepository = restaurantRepository;
-        this.orderDataMapper = orderDataMapper;
-        this.applicationDomainEventPublisher = applicationDomainEventPublisher;
-    }
+    private final OrderCreatedPaymentRequestMessagePublisher orderCreatedEventDomainEventPublisher;
 
     @Transactional
     public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());
         Restaurant restaurant = checkRestaurant(createOrderCommand);
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-        OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
+        OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant, orderCreatedEventDomainEventPublisher);
         saveOrder(order);
         log.info("Order is created with id: {}", orderCreatedEvent.getOrder().getId().getValue());
-        applicationDomainEventPublisher.publish(orderCreatedEvent);
         return orderCreatedEvent;
     }
 
