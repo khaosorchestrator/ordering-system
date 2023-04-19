@@ -4,18 +4,21 @@ import com.food.ordering.system.payment.service.data.access.payment.repository.P
 import com.food.ordering.system.payment.service.data.access.payment.mapper.PaymentDataAccessMapper;
 import com.food.ordering.system.payment.service.domain.entity.Payment;
 import com.food.ordering.system.payment.service.domain.ports.output.repository.PaymentRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
 public class PaymentAdapter implements PaymentRepository {
 
     private final PaymentJpaRepository paymentJpaRepository;
     private final PaymentDataAccessMapper paymentDataAccessMapper;
+
+    public PaymentAdapter(PaymentJpaRepository paymentJpaRepository, PaymentDataAccessMapper paymentDataAccessMapper) {
+        this.paymentJpaRepository = paymentJpaRepository;
+        this.paymentDataAccessMapper = paymentDataAccessMapper;
+    }
 
     @Override
     public Payment save(Payment payment) {
