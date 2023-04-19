@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>payment-message</artifactId>
+    <artifactId>payment-messaging</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.food.ordering.system</groupId>
