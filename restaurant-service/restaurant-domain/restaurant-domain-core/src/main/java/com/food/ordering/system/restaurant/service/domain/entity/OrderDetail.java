@@ -13,6 +13,18 @@ public class OrderDetail extends BaseEntity<OrderId> {
     private final Money totalAmount;
     private final List<Product> products;
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public Money getTotalAmount() {
+        return totalAmount;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
     private OrderDetail(Builder builder) {
         setId(builder.orderId);
         orderStatus = builder.orderStatus;
