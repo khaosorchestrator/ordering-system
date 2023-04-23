@@ -16,6 +16,7 @@ import static com.food.ordering.system.domain.DomainConstants.ZONE_ID;
 
 @Slf4j
 public class RestaurantDomainServiceImpl implements RestaurantDomainService {
+
     @Override
     public OrderApprovalEvent validateOrder(Restaurant restaurant,
                                             List<String> failureMessages,
