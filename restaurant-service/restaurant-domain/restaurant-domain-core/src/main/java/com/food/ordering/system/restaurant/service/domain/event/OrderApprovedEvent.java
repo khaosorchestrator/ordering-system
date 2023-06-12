@@ -14,8 +14,8 @@ public class OrderApprovedEvent extends OrderApprovalEvent {
     public OrderApprovedEvent(OrderApproval orderApproval,
                               RestaurantId restaurantId,
                               List<String> failureMessages,
-                              ZonedDateTime zonedDateTime, DomainEventPublisher<OrderApprovedEvent> orderApprovedEventDomainEventPublisher) {
-        super(orderApproval, restaurantId, failureMessages, zonedDateTime);
+                              ZonedDateTime createdAt, DomainEventPublisher<OrderApprovedEvent> orderApprovedEventDomainEventPublisher) {
+        super(orderApproval, restaurantId, failureMessages, createdAt);
         this.orderApprovedEventDomainEventPublisher = orderApprovedEventDomainEventPublisher;
     }
 
