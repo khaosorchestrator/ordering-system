@@ -1,4 +1,4 @@
-package com.ordering.system.restaurant.service.data.access.restaurant.mapper;
+package com.food.ordering.system.restaurant.service.data.access.restaurant.mapper;
 
 import com.food.ordering.system.data.access.restaurant.entity.RestaurantEntity;
 import com.food.ordering.system.data.access.restaurant.exception.RestaurantDataAccessException;
@@ -11,7 +11,7 @@ import com.food.ordering.system.restaurant.service.domain.entity.OrderDetail;
 import com.food.ordering.system.restaurant.service.domain.entity.Product;
 import com.food.ordering.system.restaurant.service.domain.entity.Restaurant;
 import com.food.ordering.system.restaurant.service.domain.valueobject.OrderApprovalId;
-import com.ordering.system.restaurant.service.data.access.restaurant.entity.OrderApprovalEntity;
+import com.food.ordering.system.restaurant.service.data.access.restaurant.entity.OrderApprovalEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
