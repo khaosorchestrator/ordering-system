@@ -35,7 +35,7 @@ public class OrderRejectedKafkaMessagePublisher implements OrderRejectedMessageP
                     orderId,
                     restaurantApprovalResponseAvroModel,
                     kafkaMessageHelper.getKafkaCallback(restaurantServiceConfigData
-                            .getRestaurantApprovalResponseTopicName(),
+                                    .getRestaurantApprovalResponseTopicName(),
                             restaurantApprovalResponseAvroModel,
                             orderId,
                             "RestaurantApprovalResponseAvroModel"));
