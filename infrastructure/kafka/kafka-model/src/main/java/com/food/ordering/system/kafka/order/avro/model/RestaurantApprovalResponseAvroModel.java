@@ -48,7 +48,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
     private java.time.Instant createdAt;
     private com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus;
     private java.util.List<java.lang.String> failureMessages;
-
     /**
      * Default constructor.  Note that this does not initialize fields
      * to their default values from the schema.  If that is desired then
@@ -56,17 +55,15 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
      */
     public RestaurantApprovalResponseAvroModel() {
     }
-
     /**
      * All-args constructor.
-     *
-     * @param id                  The new value for id
-     * @param sagaId              The new value for sagaId
-     * @param restaurantId        The new value for restaurantId
-     * @param orderId             The new value for orderId
-     * @param createdAt           The new value for createdAt
+     * @param id The new value for id
+     * @param sagaId The new value for sagaId
+     * @param restaurantId The new value for restaurantId
+     * @param orderId The new value for orderId
+     * @param createdAt The new value for createdAt
      * @param orderApprovalStatus The new value for orderApprovalStatus
-     * @param failureMessages     The new value for failureMessages
+     * @param failureMessages The new value for failureMessages
      */
     public RestaurantApprovalResponseAvroModel(java.lang.String id, java.lang.String sagaId, java.lang.String restaurantId, java.lang.String orderId, java.time.Instant createdAt, com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus, java.util.List<java.lang.String> failureMessages) {
         this.id = id;
@@ -84,7 +81,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Return the BinaryMessageEncoder instance used by this class.
-     *
      * @return the message encoder used by this class
      */
     public static BinaryMessageEncoder<RestaurantApprovalResponseAvroModel> getEncoder() {
@@ -93,7 +89,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Return the BinaryMessageDecoder instance used by this class.
-     *
      * @return the message decoder used by this class
      */
     public static BinaryMessageDecoder<RestaurantApprovalResponseAvroModel> getDecoder() {
@@ -102,7 +97,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
-     *
      * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
      * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
      */
@@ -112,7 +106,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Deserializes a RestaurantApprovalResponseAvroModel from a ByteBuffer.
-     *
      * @param b a byte buffer holding serialized data for an instance of this class
      * @return a RestaurantApprovalResponseAvroModel instance decoded from the given buffer
      * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
@@ -124,7 +117,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Creates a new RestaurantApprovalResponseAvroModel RecordBuilder.
-     *
      * @return A new RestaurantApprovalResponseAvroModel RecordBuilder
      */
     public static com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder newBuilder() {
@@ -133,7 +125,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Creates a new RestaurantApprovalResponseAvroModel RecordBuilder by copying an existing Builder.
-     *
      * @param other The existing builder to copy.
      * @return A new RestaurantApprovalResponseAvroModel RecordBuilder
      */
@@ -147,7 +138,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Creates a new RestaurantApprovalResponseAvroModel RecordBuilder by copying an existing RestaurantApprovalResponseAvroModel instance.
-     *
      * @param other The existing instance to copy.
      * @return A new RestaurantApprovalResponseAvroModel RecordBuilder
      */
@@ -161,7 +151,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Serializes this RestaurantApprovalResponseAvroModel to a ByteBuffer.
-     *
      * @return a buffer holding the serialized data for this instance
      * @throws java.io.IOException if this instance could not be serialized
      */
@@ -236,7 +225,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'id' field.
-     *
      * @return The value of the 'id' field.
      */
     public java.lang.String getId() {
@@ -245,7 +233,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'id' field.
-     *
      * @param value the value to set.
      */
     public void setId(java.lang.String value) {
@@ -254,7 +241,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'sagaId' field.
-     *
      * @return The value of the 'sagaId' field.
      */
     public java.lang.String getSagaId() {
@@ -263,7 +249,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'sagaId' field.
-     *
      * @param value the value to set.
      */
     public void setSagaId(java.lang.String value) {
@@ -272,7 +257,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'restaurantId' field.
-     *
      * @return The value of the 'restaurantId' field.
      */
     public java.lang.String getRestaurantId() {
@@ -281,7 +265,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'restaurantId' field.
-     *
      * @param value the value to set.
      */
     public void setRestaurantId(java.lang.String value) {
@@ -290,7 +273,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'orderId' field.
-     *
      * @return The value of the 'orderId' field.
      */
     public java.lang.String getOrderId() {
@@ -299,7 +281,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'orderId' field.
-     *
      * @param value the value to set.
      */
     public void setOrderId(java.lang.String value) {
@@ -308,7 +289,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'createdAt' field.
-     *
      * @return The value of the 'createdAt' field.
      */
     public java.time.Instant getCreatedAt() {
@@ -317,7 +297,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'createdAt' field.
-     *
      * @param value the value to set.
      */
     public void setCreatedAt(java.time.Instant value) {
@@ -326,7 +305,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'orderApprovalStatus' field.
-     *
      * @return The value of the 'orderApprovalStatus' field.
      */
     public com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus getOrderApprovalStatus() {
@@ -335,7 +313,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'orderApprovalStatus' field.
-     *
      * @param value the value to set.
      */
     public void setOrderApprovalStatus(com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus value) {
@@ -344,7 +321,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Gets the value of the 'failureMessages' field.
-     *
      * @return The value of the 'failureMessages' field.
      */
     public java.util.List<java.lang.String> getFailureMessages() {
@@ -353,7 +329,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
     /**
      * Sets the value of the 'failureMessages' field.
-     *
      * @param value the value to set.
      */
     public void setFailureMessages(java.util.List<java.lang.String> value) {
@@ -387,16 +362,13 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
         private com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus orderApprovalStatus;
         private java.util.List<java.lang.String> failureMessages;
 
-        /**
-         * Creates a new Builder
-         */
+        /** Creates a new Builder */
         private Builder() {
             super(SCHEMA$, MODEL$);
         }
 
         /**
          * Creates a Builder by copying an existing Builder.
-         *
          * @param other The existing Builder to copy.
          */
         private Builder(com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder other) {
@@ -433,7 +405,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Creates a Builder by copying an existing RestaurantApprovalResponseAvroModel instance
-         *
          * @param other The existing instance to copy.
          */
         private Builder(com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel other) {
@@ -470,7 +441,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'id' field.
-         *
          * @return The value.
          */
         public java.lang.String getId() {
@@ -480,7 +450,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'id' field.
-         *
          * @param value The value of 'id'.
          * @return This builder.
          */
@@ -493,7 +462,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'id' field has been set.
-         *
          * @return True if the 'id' field has been set, false otherwise.
          */
         public boolean hasId() {
@@ -503,7 +471,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'id' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearId() {
@@ -514,7 +481,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'sagaId' field.
-         *
          * @return The value.
          */
         public java.lang.String getSagaId() {
@@ -524,7 +490,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'sagaId' field.
-         *
          * @param value The value of 'sagaId'.
          * @return This builder.
          */
@@ -537,7 +502,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'sagaId' field has been set.
-         *
          * @return True if the 'sagaId' field has been set, false otherwise.
          */
         public boolean hasSagaId() {
@@ -547,7 +511,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'sagaId' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearSagaId() {
@@ -558,7 +521,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'restaurantId' field.
-         *
          * @return The value.
          */
         public java.lang.String getRestaurantId() {
@@ -568,7 +530,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'restaurantId' field.
-         *
          * @param value The value of 'restaurantId'.
          * @return This builder.
          */
@@ -581,7 +542,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'restaurantId' field has been set.
-         *
          * @return True if the 'restaurantId' field has been set, false otherwise.
          */
         public boolean hasRestaurantId() {
@@ -591,7 +551,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'restaurantId' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearRestaurantId() {
@@ -602,7 +561,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'orderId' field.
-         *
          * @return The value.
          */
         public java.lang.String getOrderId() {
@@ -612,7 +570,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'orderId' field.
-         *
          * @param value The value of 'orderId'.
          * @return This builder.
          */
@@ -625,7 +582,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'orderId' field has been set.
-         *
          * @return True if the 'orderId' field has been set, false otherwise.
          */
         public boolean hasOrderId() {
@@ -635,7 +591,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'orderId' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearOrderId() {
@@ -646,7 +601,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'createdAt' field.
-         *
          * @return The value.
          */
         public java.time.Instant getCreatedAt() {
@@ -656,7 +610,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'createdAt' field.
-         *
          * @param value The value of 'createdAt'.
          * @return This builder.
          */
@@ -669,7 +622,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'createdAt' field has been set.
-         *
          * @return True if the 'createdAt' field has been set, false otherwise.
          */
         public boolean hasCreatedAt() {
@@ -679,7 +631,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'createdAt' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearCreatedAt() {
@@ -689,7 +640,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'orderApprovalStatus' field.
-         *
          * @return The value.
          */
         public com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus getOrderApprovalStatus() {
@@ -699,7 +649,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'orderApprovalStatus' field.
-         *
          * @param value The value of 'orderApprovalStatus'.
          * @return This builder.
          */
@@ -712,7 +661,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'orderApprovalStatus' field has been set.
-         *
          * @return True if the 'orderApprovalStatus' field has been set, false otherwise.
          */
         public boolean hasOrderApprovalStatus() {
@@ -722,7 +670,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'orderApprovalStatus' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearOrderApprovalStatus() {
@@ -733,7 +680,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Gets the value of the 'failureMessages' field.
-         *
          * @return The value.
          */
         public java.util.List<java.lang.String> getFailureMessages() {
@@ -743,7 +689,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Sets the value of the 'failureMessages' field.
-         *
          * @param value The value of 'failureMessages'.
          * @return This builder.
          */
@@ -756,7 +701,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Checks whether the 'failureMessages' field has been set.
-         *
          * @return True if the 'failureMessages' field has been set, false otherwise.
          */
         public boolean hasFailureMessages() {
@@ -766,7 +710,6 @@ public class RestaurantApprovalResponseAvroModel extends org.apache.avro.specifi
 
         /**
          * Clears the value of the 'failureMessages' field.
-         *
          * @return This builder.
          */
         public com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel.Builder clearFailureMessages() {

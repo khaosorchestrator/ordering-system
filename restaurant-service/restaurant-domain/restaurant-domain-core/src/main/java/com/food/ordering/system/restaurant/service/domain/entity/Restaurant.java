@@ -12,9 +12,20 @@ import java.util.UUID;
 
 public class Restaurant extends AggregateRoot<RestaurantId> {
 
+    private final OrderDetail orderDetail;
     private OrderApproval orderApproval;
     private boolean active;
-    private final OrderDetail orderDetail;
+
+    private Restaurant(Builder builder) {
+        setId(builder.restaurantId);
+        orderApproval = builder.orderApproval;
+        active = builder.active;
+        orderDetail = builder.orderDetail;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public void validateOrder(List<String> failureMessages) {
         if (orderDetail.getOrderStatus() != OrderStatus.PAID) {
@@ -42,27 +53,16 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
                 .build();
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    private Restaurant(Builder builder) {
-        setId(builder.restaurantId);
-        orderApproval = builder.orderApproval;
-        active = builder.active;
-        orderDetail = builder.orderDetail;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public OrderApproval getOrderApproval() {
         return orderApproval;
     }
 
     public boolean isActive() {
         return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public OrderDetail getOrderDetail() {

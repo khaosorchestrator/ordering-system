@@ -1,6 +1,7 @@
-package com.food.ordering.system.order.service.data.access.order.adapter;
+package com.food.ordering.system.order.service.data.access.order.impl;
 
 import com.food.ordering.system.domain.entity.Order;
+import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.domain.valueobject.TrackingId;
 import com.food.ordering.system.order.service.data.access.order.mapper.OrderDataAccessMapper;
 import com.food.ordering.system.order.service.data.access.order.repository.OrderJpaRepository;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class OrderRepositoryAdapter implements OrderRepository {
+public class OrderRepositoryImpl implements OrderRepository {
 
     private final OrderJpaRepository orderJpaRepository;
     private final OrderDataAccessMapper orderDataAccessMapper;
@@ -21,6 +22,12 @@ public class OrderRepositoryAdapter implements OrderRepository {
     public Order save(Order order) {
         return orderDataAccessMapper.orderEntityToOrder(orderJpaRepository
                 .save(orderDataAccessMapper.orderToOrderEntity(order)));
+    }
+
+    @Override
+    public Optional<Order> findById(OrderId orderId) {
+        return orderJpaRepository.findById(orderId.getValue())
+                .map(orderDataAccessMapper::orderEntityToOrder);
     }
 
     @Override

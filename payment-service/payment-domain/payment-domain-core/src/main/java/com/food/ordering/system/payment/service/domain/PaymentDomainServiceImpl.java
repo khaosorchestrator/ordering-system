@@ -24,6 +24,13 @@ import static com.food.ordering.system.domain.DomainConstants.ZONE_ID;
 @Slf4j
 public class PaymentDomainServiceImpl implements PaymentDomainService {
 
+    private static Money getTotalHistoryAmount(List<CreditHistory> creditHistories, TransactionType transactionType) {
+        return creditHistories.stream()
+                .filter(creditHistory -> transactionType == creditHistory.getTransactionType())
+                .map(CreditHistory::getAmount)
+                .reduce(Money.ZERO, Money::add);
+    }
+
     @Override
     public PaymentEvent validateAndInitializePayment(Payment payment,
                                                      CreditEntry creditEntry,
@@ -111,13 +118,6 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
             failureMessages.add("Credit history total is not equal to current credit for customer id: " +
                     creditEntry.getCustomerId().getValue() + "!");
         }
-    }
-
-    private static Money getTotalHistoryAmount(List<CreditHistory> creditHistories, TransactionType transactionType) {
-        return creditHistories.stream()
-                .filter(creditHistory -> transactionType == creditHistory.getTransactionType())
-                .map(CreditHistory::getAmount)
-                .reduce(Money.ZERO, Money::add);
     }
 
     private void addCreditEntry(Payment payment, CreditEntry creditEntry) {

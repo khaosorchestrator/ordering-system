@@ -20,7 +20,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=restaurant&binaryTransfer=true&reWriteBatchedInserts=true&stringType=unspecified
     username: postgres
-    password: admin
+    password: temp123
     driver-class-name: org.postgresql.Driver
   sql:
     init:
